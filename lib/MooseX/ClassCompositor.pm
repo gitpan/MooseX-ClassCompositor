@@ -1,6 +1,6 @@
 package MooseX::ClassCompositor;
 {
-  $MooseX::ClassCompositor::VERSION = '0.001';
+  $MooseX::ClassCompositor::VERSION = '0.002';
 }
 use Moose;
 # ABSTRACT: a factory that builds classes from roles
@@ -174,6 +174,7 @@ sub __hash_to_string {
   join ", " => @k;
 }
 
+
 __PACKAGE__->meta->make_immutable;
 1;
 
@@ -186,7 +187,27 @@ MooseX::ClassCompositor - a factory that builds classes from roles
 
 =head1 VERSION
 
-version 0.001
+version 0.002
+
+=head1 SYNOPSIS
+
+  my $comp = MooseX::ClassCompositor->new({
+    class_basename  => 'MyApp::Class',
+    class_metaroles => {
+      class => [ 'MooseX::StrictConstructor::Trait::Class' ],
+    },
+    role_prefixes   => {
+      ''  => 'MyApp::Role::',
+      '=' => '',
+    },
+  });
+
+  my $class = $comp->class_for( qw( PieEater ContestWinner ) );
+
+  my $object = $class->new({
+    pie_type => 'banana',
+    place    => '2nd',
+  });
 
 =head1 OVERVIEW
 
@@ -258,29 +279,23 @@ applied multiple times with each application accounted for internally.
 Note that at present, passing Moose::Meta::Role objects is B<not> supported.
 This should change in the future.
 
-=head1 ABSTRACT
+=head1 THANKS
 
-  my $comp = MooseX::ClassCompositor->new({
-    class_basename  => 'MyApp::Class',
-    class_metaroles => {
-      class => [ 'MooseX::StrictConstructor::Trait::Class' ],
-    },
-    role_prefixes   => {
-      ''  => 'MyApp::Role::',
-      '=' => '',
-    },
-  });
+Thanks to Pobox.com for sponsoring the development of this library.
 
-  my $class = $comp->class_for( qw( PieEater ContestWinner ) );
+=head1 AUTHORS
 
-  my $object = $class->new({
-    pie_type => 'banana',
-    place    => '2nd',
-  });
+=over 4
 
-=head1 AUTHOR
+=item *
 
 Ricardo Signes <rjbs@cpan.org>
+
+=item *
+
+Mark Jason Dominus <mjd@cpan.org>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

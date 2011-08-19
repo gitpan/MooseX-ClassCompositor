@@ -10,7 +10,7 @@ use ExtUtils::MakeMaker 6.30;
 
 my %WriteMakefileArgs = (
   "ABSTRACT" => "a factory that builds classes from roles",
-  "AUTHOR" => "Ricardo Signes <rjbs\@cpan.org>",
+  "AUTHOR" => "Ricardo Signes <rjbs\@cpan.org>, Mark Jason Dominus <mjd\@cpan.org>",
   "BUILD_REQUIRES" => {
     "Moose::Role" => 0,
     "MooseX::Role::Parameterized" => "0.23",
@@ -35,7 +35,7 @@ my %WriteMakefileArgs = (
     "String::RewritePrefix" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }

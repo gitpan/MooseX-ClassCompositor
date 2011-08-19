@@ -2,6 +2,7 @@
 abstract: 'a factory that builds classes from roles'
 author:
   - 'Ricardo Signes <rjbs@cpan.org>'
+  - 'Mark Jason Dominus <mjd@cpan.org>'
 build_requires:
   Moose::Role: 0
   MooseX::Role::Parameterized: 0.23
@@ -29,7 +30,7 @@ requires:
 resources:
   homepage: https://github.com/rjbs/MooseX-ClassCompositor
   repository: https://github.com/rjbs/MooseX-ClassCompositor.git
-version: 0.001
+version: 0.002
 x_Dist_Zilla:
   plugins:
     -
