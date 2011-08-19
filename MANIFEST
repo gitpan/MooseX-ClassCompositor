@@ -1,0 +1,14 @@
+Changes
+LICENSE
+MANIFEST
+META.json
+META.yml
+Makefile.PL
+README
+dist.ini
+lib/MooseX/ClassCompositor.pm
+t/class.t
+t/lib/BasicBar.pm
+t/lib/BasicFoo.pm
+t/lib/Parameterized.pm
+t/release-pod-syntax.t
