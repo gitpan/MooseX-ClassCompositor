@@ -1,6 +1,6 @@
 package MooseX::ClassCompositor;
 {
-  $MooseX::ClassCompositor::VERSION = '0.002';
+  $MooseX::ClassCompositor::VERSION = '0.003';
 }
 use Moose;
 # ABSTRACT: a factory that builds classes from roles
@@ -53,6 +53,13 @@ sub _rewrite_roles {
   my ($self, @in) = @_;
   return String::RewritePrefix->rewrite($self->_role_prefixes, @in);
 }
+
+
+has fixed_roles => (
+  reader  => '_fixed_roles',
+  isa     => 'ArrayRef',
+  default => sub {  []  },
+);
 
 has serial_counter => (
   reader  => '_serial_counter',
@@ -118,7 +125,12 @@ sub class_for {
 
   my $name = join q{::}, $self->class_basename, @all_names;
 
-  @role_class_names = $self->_rewrite_roles(@role_class_names);
+  @role_class_names = (
+    $self->_rewrite_roles(
+      @role_class_names,
+      @{ $self->_fixed_roles },
+    ),
+  );
 
   Class::MOP::load_class($_) for @role_class_names;
 
@@ -187,7 +199,7 @@ MooseX::ClassCompositor - a factory that builds classes from roles
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -253,6 +265,13 @@ pairs.
 
 This attribute is used as the arguments to L<String::RewritePrefix> for
 expanding role names passed to the compositor's L<class_for> method.
+
+=head2 fixed_roles
+
+This attribute may be initialized with an arrayref of role names.  These roles
+will I<always> be composed in the classes built by the compositor.
+
+These names I<will> be rewritten by the role prefixes.
 
 =head1 METHODS
 
