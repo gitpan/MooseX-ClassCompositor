@@ -1,6 +1,6 @@
 package MooseX::ClassCompositor;
 {
-  $MooseX::ClassCompositor::VERSION = '0.003';
+  $MooseX::ClassCompositor::VERSION = '0.004';
 }
 use Moose;
 # ABSTRACT: a factory that builds classes from roles
@@ -142,12 +142,12 @@ sub class_for {
     superclasses => [ 'Moose::Object' ],
   ));
 
-  apply_all_roles($class, @role_class_names, map $_->name, @roles);
-
   $class = Moose::Util::MetaRole::apply_metaroles(
     for => $class->name,
     class_metaroles => $self->_class_metaroles,
   );
+
+  apply_all_roles($class, @role_class_names, map $_->name, @roles);
 
   $class->make_immutable;
 
@@ -199,7 +199,7 @@ MooseX::ClassCompositor - a factory that builds classes from roles
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 

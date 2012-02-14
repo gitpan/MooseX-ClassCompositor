@@ -7,6 +7,7 @@ Makefile.PL
 README
 dist.ini
 lib/MooseX/ClassCompositor.pm
+t/advice.t
 t/class.t
 t/lib/BasicBar.pm
 t/lib/BasicFoo.pm
