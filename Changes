@@ -1,5 +1,11 @@
 Revision history for MooseX-ClassCompositor
 
+0.005     2012-10-09 22:42:13 America/New_York
+          make it possible to pass Moose::Meta::Role objects to ->class_for
+          (Thanks, Toby Inkster!)
+
+          ...also make it possible to forbid them again!
+
 0.004     2012-02-14 16:45:48 America/New_York
           [CRITICAL BUG FIX]
           apply metaroles before other roles, to avoid losing minor details

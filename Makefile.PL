@@ -12,6 +12,9 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "a factory that builds classes from roles",
   "AUTHOR" => "Ricardo Signes <rjbs\@cpan.org>, Mark Jason Dominus <mjd\@cpan.org>",
   "BUILD_REQUIRES" => {
+    "Data::OptList" => 0,
+    "File::Find" => 0,
+    "File::Temp" => 0,
     "Moose::Role" => 0,
     "MooseX::Role::Parameterized" => "0.23",
     "Test::More" => "0.96",
@@ -35,7 +38,7 @@ my %WriteMakefileArgs = (
     "String::RewritePrefix" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.004",
+  "VERSION" => "0.005",
   "test" => {
     "TESTS" => "t/*.t"
   }
