@@ -1,6 +1,6 @@
 package MooseX::ClassCompositor;
 {
-  $MooseX::ClassCompositor::VERSION = '0.005';
+  $MooseX::ClassCompositor::VERSION = '0.006';
 }
 use Moose;
 # ABSTRACT: a factory that builds classes from roles
@@ -119,7 +119,7 @@ sub class_for {
 
       push @roles, $role_object;
       $name = $moniker;
-    } elsif (blessed $name and $name->DOES('Moose::Meta::Role')) {
+    } elsif (blessed $name and $name->isa('Moose::Meta::Role')) {
       confess "this class compositor does not allow role objects"
         if $self->forbid_meta_role_objects;
 
@@ -138,7 +138,7 @@ sub class_for {
   my $name = join q{::}, $self->class_basename, @all_names;
 
   for my $r (@{ $self->_fixed_roles }) {
-    if (blessed $r and $r->DOES('Moose::Meta::Role')) {
+    if (blessed $r and $r->isa('Moose::Meta::Role')) {
       push @roles, $r;
     } else {
       push @role_class_names, $r;
@@ -182,7 +182,7 @@ sub _memoization_key {
     if (ref $arg eq 'ARRAY') {
       my ($role_name, $moniker, $params) = @$arg;
       push @k, "$moniker : { " . __hash_to_string($params) . " }";
-    } elsif (blessed $arg and $arg->DOES('Moose::Meta::Role')) {
+    } elsif (blessed $arg and $arg->isa('Moose::Meta::Role')) {
       push @k, $arg->name;
     } else {
       push @k, $arg;
@@ -217,7 +217,7 @@ MooseX::ClassCompositor - a factory that builds classes from roles
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
