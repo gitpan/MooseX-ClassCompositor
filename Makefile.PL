@@ -11,16 +11,7 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "a factory that builds classes from roles",
   "AUTHOR" => "Ricardo Signes <rjbs\@cpan.org>, Mark Jason Dominus <mjd\@cpan.org>",
-  "BUILD_REQUIRES" => {
-    "Data::OptList" => 0,
-    "File::Find" => 0,
-    "File::Temp" => 0,
-    "Moose::Role" => 0,
-    "MooseX::Role::Parameterized" => "0.23",
-    "Test::More" => "0.96",
-    "strict" => 0,
-    "warnings" => 0
-  },
+  "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
@@ -38,12 +29,36 @@ my %WriteMakefileArgs = (
     "String::RewritePrefix" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.006",
+  "TEST_REQUIRES" => {
+    "Data::OptList" => 0,
+    "File::Spec" => 0,
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
+    "Moose::Role" => 0,
+    "MooseX::Role::Parameterized" => "0.23",
+    "Test::More" => "0.96",
+    "strict" => 0,
+    "warnings" => 0
+  },
+  "VERSION" => "0.007",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};

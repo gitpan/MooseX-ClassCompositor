@@ -1,6 +1,6 @@
 package MooseX::ClassCompositor;
 {
-  $MooseX::ClassCompositor::VERSION = '0.006';
+  $MooseX::ClassCompositor::VERSION = '0.007';
 }
 use Moose;
 # ABSTRACT: a factory that builds classes from roles
@@ -217,7 +217,7 @@ MooseX::ClassCompositor - a factory that builds classes from roles
 
 =head1 VERSION
 
-version 0.006
+version 0.007
 
 =head1 SYNOPSIS
 
