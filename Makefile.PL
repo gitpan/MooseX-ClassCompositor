@@ -20,6 +20,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "MooseX::ClassCompositor",
   "PREREQ_PM" => {
+    "Class::Load" => 0,
     "Moose" => 0,
     "Moose::Util" => 0,
     "Moose::Util::MetaRole" => 0,
@@ -31,16 +32,13 @@ my %WriteMakefileArgs = (
   },
   "TEST_REQUIRES" => {
     "Data::OptList" => 0,
-    "File::Spec" => 0,
-    "IO::Handle" => 0,
-    "IPC::Open3" => 0,
     "Moose::Role" => 0,
     "MooseX::Role::Parameterized" => "0.23",
     "Test::More" => "0.96",
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.007",
+  "VERSION" => "0.008",
   "test" => {
     "TESTS" => "t/*.t"
   }
